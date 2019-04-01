@@ -1,5 +1,4 @@
 import React from 'react';
-import slugify from 'slugify';
 import { LANGUAGES, TYPES } from '../../constants';
 import { useShamecaps } from '../../context/shamecaps';
 import Select from '../select/select';
