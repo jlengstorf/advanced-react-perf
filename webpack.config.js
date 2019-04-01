@@ -47,6 +47,7 @@ module.exports = {
     }),
     new CleanWebpackPlugin()
   ],
+  devtool: 'source-map',
   devServer: {
     host: 'localhost',
     port: 3000,
