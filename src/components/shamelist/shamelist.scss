@@ -1,0 +1,85 @@
+.filters {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 40px;
+  margin-top: 60px;
+}
+
+.shamelist {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  grid-gap: 50px;
+
+  @media screen and (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+
+  .title {
+    font-weight: 900;
+    line-height: normal;
+    font-size: 24px;
+    margin: 12px 0;
+    color: #011627;
+  }
+
+  .details {
+    font-style: normal;
+    font-weight: normal;
+    line-height: normal;
+    font-size: 16px;
+
+    color: #637777;
+
+    a {
+      color: #637777;
+    }
+  }
+}
+
+.shame {
+  background: #663399;
+  padding: 20px;
+}
+
+.terminal {
+  color: rgb(171, 178, 191);
+  background-color: rgb(1, 22, 39);
+  min-width: inherit;
+  position: relative;
+  z-index: 1;
+  box-shadow: rgba(0, 0, 0, 0.55) 0px 20px 68px;
+  border-radius: 5px;
+  padding: 20px;
+
+  .controls {
+    position: relative;
+    margin-bottom: 10px;
+  }
+
+  .prism-code {
+    white-space: pre-wrap;
+    font-size: 14px;
+  }
+}
+
+.load-more-button,
+.delete-button {
+  align-items: center;
+  background: #ff2c83;
+  border: none;
+  border-radius: 4px;
+  color: #fff;
+  display: flex;
+  font-family: Montserrat;
+  font-weight: 600;
+  justify-content: center;
+  margin-top: 0.5rem;
+  padding: 0.25rem 1rem;
+}
+
+.load-more-button {
+  font-size: 20px;
+  margin: 40px auto 0;
+  padding: 0.5rem 1rem;
+}

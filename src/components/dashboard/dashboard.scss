@@ -1,0 +1,43 @@
+.dashboard-heading {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+  margin-top: 60px;
+}
+
+.chart {
+  align-items: center;
+  background: #d6deeb40;
+  border-bottom: 1px solid #d6deeb;
+  border-top: 1px solid #d6deeb;
+  display: flex;
+  height: 300px;
+  justify-content: center;
+  width: 100%;
+
+  .rv-radar-chart {
+    transform: scale(0.5);
+  }
+
+  @media (min-width: 600px) {
+    height: 600px;
+
+    .rv-radar-chart {
+      transform: scale(1);
+    }
+  }
+}
+
+.rv-xy-plot__axis__line {
+  stroke: #637777;
+  stroke-width: 1;
+  stroke-opacity: 0.5;
+}
+
+.rv-xy-manipulable-axis__ticks {
+  opacity: 0;
+}
+
+.rv-xy-plot__circular-grid-lines__line {
+  stroke: #637777;
+  stroke-opacity: 0.5;
+}

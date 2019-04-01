@@ -1,0 +1,32 @@
+.banner {
+  background-image: url('../images/header.png');
+  background-size: cover;
+  height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: Montserrat;
+  font-weight: 600;
+  font-size: 60px;
+  line-height: 80px;
+  text-align: center;
+
+  color: #ffffff;
+
+  text-shadow: 0px 2px 2px #637777;
+}
+
+.new-shamecap-notice {
+  background: #addb6740;
+  border: 1px solid #addb67;
+  border-radius: 5px;
+  color: #011627;
+  font-size: 0.875rem;
+  margin: 2rem 0 0;
+  padding: 1rem;
+  text-align: center;
+
+  p {
+    margin: 0;
+  }
+}
