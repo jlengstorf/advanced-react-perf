@@ -2,10 +2,15 @@
   "name": "advanced-react-perf",
   "version": "1.0.0",
   "private": true,
-  "author": "Jason Lengstorf <jason@lengstorf.com>",
+  "contributors": [
+    "Jason Lengstorf <jason@lengstorf.com>",
+    "Sara Vieira <hey@iamsaravieira.com>",
+    "Sia Karamalegos <sia@clioandcalliope.com>"
+  ],
   "license": "MIT",
   "scripts": {
-    "start": "webpack-dev-server"
+    "start": "webpack-dev-server",
+    "build": "webpack"
   },
   "devDependencies": {
     "@babel/cli": "^7.2.3",
