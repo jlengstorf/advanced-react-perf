@@ -9,8 +9,8 @@
   ],
   "license": "MIT",
   "scripts": {
-    "start": "webpack-dev-server",
-    "build": "webpack"
+    "start": "NODE_ENV=DEVELOPMENT webpack-dev-server",
+    "build": "NODE_ENV=PRODUCTION webpack -p"
   },
   "devDependencies": {
     "@babel/cli": "^7.2.3",
@@ -20,14 +20,18 @@
     "@babel/preset-react": "^7.0.0",
     "babel-loader": "^8.0.5",
     "clean-webpack-plugin": "^2.0.1",
+    "compression-webpack-plugin": "^2.0.0",
     "css-loader": "^2.1.1",
     "file-loader": "^3.0.1",
     "html-webpack-plugin": "^3.2.0",
+    "mini-css-extract-plugin": "^0.5.0",
     "node-sass": "^4.11.0",
     "react-svg-loader": "^2.1.0",
     "sass-loader": "^7.1.0",
     "style-loader": "^0.23.1",
+    "terser-webpack-plugin": "^1.2.3",
     "webpack": "^4.29.6",
+    "webpack-bundle-analyzer": "^3.1.0",
     "webpack-cli": "^3.3.0",
     "webpack-dev-server": "^3.2.1"
   },

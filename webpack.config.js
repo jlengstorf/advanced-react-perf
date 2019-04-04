@@ -1,6 +1,13 @@
-const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
+const path = require('path')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const CleanWebpackPlugin = require('clean-webpack-plugin')
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
+  .BundleAnalyzerPlugin
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const TerserPlugin = require('terser-webpack-plugin')
+const CompressionPlugin = require('compression-webpack-plugin')
+
+const isProd = process.env.PRODUCTION
 
 module.exports = {
   entry: {
@@ -19,11 +26,22 @@ module.exports = {
       },
       {
         test: /\.s(a|c)ss$/,
-        use: ['style-loader', 'css-loader', 'sass-loader']
+        use: [
+          // {
+          //   loader: MiniCssExtractPlugin.loader
+          // },
+          'css-loader',
+          'sass-loader'
+        ]
       },
       {
         test: /\.css$/,
-        use: ['style-loader', 'css-loader']
+        use: [
+          // {
+          //   loader: MiniCssExtractPlugin.loader
+          // },
+          'css-loader'
+        ]
       },
       {
         test: /\.svg$/,
@@ -42,16 +60,24 @@ module.exports = {
     ]
   },
   plugins: [
+    new BundleAnalyzerPlugin({
+      openAnalyzer: false,
+      analyzerMode: 'static',
+      logLevel: 'warn'
+    }),
+    new TerserPlugin(),
     new HtmlWebpackPlugin({
       template: 'index.html'
     }),
-    new CleanWebpackPlugin()
+    new CleanWebpackPlugin(),
+    new MiniCssExtractPlugin()
+    // new CompressionPlugin()
   ],
-  devtool: 'source-map',
+  devtool: isProd ? 'none' : 'source-map',
   devServer: {
     host: 'localhost',
     port: 3000,
     historyApiFallback: true,
     open: true
   }
-};
+}
