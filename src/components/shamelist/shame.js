@@ -1,17 +1,20 @@
-import React from 'react';
-import { Link } from '@reach/router';
-import prettier from 'prettier/standalone';
-import moment from 'moment';
-import Code from './code';
-import Controls from './controls';
+import React from 'react'
+import { Link } from '@reach/router'
+import moment from 'moment'
+import Code from './code'
+import Controls from './controls'
 
-/* eslint-disable global-require */
-const plugins = [
-  require('prettier/parser-graphql'),
-  require('prettier/parser-babylon'),
-  require('prettier/parser-markdown')
-];
-/* eslint-enable global-require */
+const loadPrettier = async () => {
+  const prettier = await import('prettier/standalone' /* webpackChunkName: "prettier" */)
+
+  const plugins = [
+    await import('prettier/parser-graphql'),
+    await import('prettier/parser-babylon'),
+    await import('prettier/parser-markdown')
+  ]
+
+  return { prettier, plugins }
+}
 
 // TODO add a `created` field to Firebase and store a timestamp.
 export default ({
@@ -25,15 +28,15 @@ export default ({
   showControls,
   deleteShamecap
 }) => {
-  let prettierCode;
-  try {
-    prettierCode = prettier.format(code, {
-      parser: language === 'javascript' ? 'babel' : language,
-      plugins
-    });
-  } catch {
-    prettierCode = code;
-  }
+  let prettierCode = code
+  loadPrettier().then(({ prettier, plugins }) => {
+    try {
+      prettierCode = prettier.format(code, {
+        parser: language === 'javascript' ? 'babel' : language,
+        plugins
+      })
+    } catch {}
+  })
 
   return (
     <section className="shame-wrapper">
@@ -64,5 +67,5 @@ export default ({
         </span>
       )}
     </section>
-  );
-};
+  )
+}
