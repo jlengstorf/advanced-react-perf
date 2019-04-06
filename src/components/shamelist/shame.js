@@ -1,22 +1,9 @@
-import React from 'react'
-import { Link } from '@reach/router'
-import moment from 'moment'
-import Code from './code'
-import Controls from './controls'
+import React from 'react';
+import { Link } from '@reach/router';
+import { distanceInWords } from 'date-fns';
+import Code from './code';
+import Controls from './controls';
 
-const loadPrettier = async () => {
-  const prettier = await import('prettier/standalone' /* webpackChunkName: "prettier" */)
-
-  const plugins = [
-    await import('prettier/parser-graphql'),
-    await import('prettier/parser-babylon'),
-    await import('prettier/parser-markdown')
-  ]
-
-  return { prettier, plugins }
-}
-
-// TODO add a `created` field to Firebase and store a timestamp.
 export default ({
   id,
   language,
@@ -28,22 +15,12 @@ export default ({
   showControls,
   deleteShamecap
 }) => {
-  let prettierCode = code
-  loadPrettier().then(({ prettier, plugins }) => {
-    try {
-      prettierCode = prettier.format(code, {
-        parser: language === 'javascript' ? 'babel' : language,
-        plugins
-      })
-    } catch {}
-  })
-
   return (
     <section className="shame-wrapper">
       <div className="shame">
         <div className="terminal">
           <Controls />
-          <Code language={language} code={prettierCode} />
+          <Code language={language} code={code} />
         </div>
       </div>
       <h3 className="title">{title}</h3>
@@ -56,7 +33,7 @@ export default ({
           >
             @{user.name}
           </Link>{' '}
-          {moment(created).fromNow()}
+          {distanceInWords(Date.now(), created, { addSuffix: true })}
         </span>
       )}
       {showControls && (
@@ -67,5 +44,5 @@ export default ({
         </span>
       )}
     </section>
-  )
-}
+  );
+};
