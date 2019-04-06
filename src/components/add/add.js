@@ -1,26 +1,30 @@
-import React, { useState } from 'react';
-import { navigate } from '@reach/router';
-import uuid from 'uuid/v4';
-import slugify from 'slugify';
-import { useUser } from '../../context/user';
-import { useShamecaps } from '../../context/shamecaps';
-import { LANGUAGES, TYPES } from '../../constants';
-import Layout from '../layout/layout';
-import Select from '../select/select';
-import CodeMirror from './codemirror';
+import React, { useState, Suspense, lazy } from 'react'
+import { navigate } from '@reach/router'
+import uuid from 'uuid/v4'
+import slugify from 'slugify'
+import { useUser } from '../../context/user'
+import { useShamecaps } from '../../context/shamecaps'
+import { LANGUAGES, TYPES } from '../../constants'
+import Layout from '../layout/layout'
+import Loading from '../loading/loading'
+import Select from '../select/select'
 
-import './add.scss';
+const CodeMirror = lazy(() =>
+  import('./codemirror' /* webpackChunkName: "codemirror" */)
+)
+
+import './add.scss'
 
 const Add = () => {
-  const [title, setTitle] = useState('');
-  const [language, setLanguage] = useState(LANGUAGES[0]);
-  const [type, setType] = useState(TYPES[0]);
-  const [code, setCode] = useState('');
-  const { user } = useUser();
-  const { createShamecap } = useShamecaps();
+  const [title, setTitle] = useState('')
+  const [language, setLanguage] = useState(LANGUAGES[0])
+  const [type, setType] = useState(TYPES[0])
+  const [code, setCode] = useState('')
+  const { user } = useUser()
+  const { createShamecap } = useShamecaps()
 
   const handleSubmit = event => {
-    event.preventDefault();
+    event.preventDefault()
 
     const data = {
       id: uuid(),
@@ -30,11 +34,11 @@ const Add = () => {
       code,
       created: Date.now(),
       user: { name: user.name }
-    };
+    }
 
-    createShamecap(data);
-    navigate('/?language=all&type=all', { state: { created: true } });
-  };
+    createShamecap(data)
+    navigate('/?language=all&type=all', { state: { created: true } })
+  }
 
   return (
     <Layout>
@@ -64,13 +68,15 @@ const Add = () => {
             />
           </div>
         </fieldset>
-        <CodeMirror onChange={c => setCode(c)} />
+        <Suspense fallback={Loading}>
+          <CodeMirror onChange={c => setCode(c)} />
+        </Suspense>
         <button type="submit" className="submit-button">
           Share Your Shame
         </button>
       </form>
     </Layout>
-  );
-};
+  )
+}
 
-export default Add;
+export default Add
