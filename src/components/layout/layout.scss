@@ -1,4 +1,4 @@
-@import './dank-mono.scss';
+@import './mono-font.scss';
 
 html {
   -ms-text-size-adjust: 100%;
@@ -594,7 +594,7 @@ td:last-child {
 tt,
 code,
 .prism-code {
-  font-family: 'dm';
+  font-family: 'Roboto Mono', 'Courier New', Courier, monospace;
 }
 
 @media only screen and (max-width: 480px) {
