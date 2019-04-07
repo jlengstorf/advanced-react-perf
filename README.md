@@ -8,7 +8,7 @@ This is the source code for an advanced React Performance workshop. It was desig
 - [Slides and controls](#slides-and-controls)
 
 ## Abstract
-Getting performance right is hard, even when you have the luxury of starting an app from scratch. It's even harder when you need to improve the performance of existing apps, as is so often the case. In this workshop, Sia Karamalegos and Jason Lengstorf will lead you through the process of:
+Getting performance right is hard, even when you have the luxury of starting an app from scratch. It's even harder when you need to improve the performance of existing apps, as is so often the case. In this workshop, Sia Karamalegos, Sara Vieira, and Jason Lengstorf will lead you through the process of:
 
 - Assessing an existing React app
 - Diagnosing performance problems
