@@ -51,6 +51,7 @@ const Add = () => {
         created: Date.now(),
         user: { name: user.name }
       };
+
       createShamecap(data);
       navigate('/?language=all&type=all', { state: { created: true } });
     });
@@ -75,12 +76,12 @@ const Add = () => {
             <Select
               label="Language"
               options={LANGUAGES}
-              handleChange={e => setLanguage({ language: e.target.value })}
+              handleChange={e => setLanguage(e.target.value)}
             />
             <Select
               label="Type"
               options={TYPES}
-              handleChange={e => setType({ type: e.target.value })}
+              handleChange={e => setType(e.target.value)}
             />
           </div>
         </fieldset>
