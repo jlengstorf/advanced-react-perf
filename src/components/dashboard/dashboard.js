@@ -1,15 +1,16 @@
-import React, { Suspense, lazy } from 'react';
+import React from 'react';
 import { useUser } from '../../context/user';
 import { useShamecaps } from '../../context/shamecaps';
 import Layout from '../layout/layout';
 import Loading from '../loading/loading';
+import Shamelist from '../shamelist/shamelist';
+import { useAnalytics } from '../../context/analytics';
+import Chart from './chart';
 
 import './dashboard.scss';
-import Shamelist from '../shamelist/shamelist';
-
-const Chart = lazy(() => import('./chart' /* webpackChunkName: "chart" */));
 
 const Dashboard = () => {
+  const { loading, metrics } = useAnalytics();
   const { user } = useUser();
   const {
     shamecaps,
@@ -21,16 +22,16 @@ const Dashboard = () => {
     user: user.name
   });
 
-  return (
+  return loading ? (
+    <Loading />
+  ) : (
     <>
       <Layout>
         <h1 className="dashboard-heading">Your Account</h1>
         <p>Here’s how people feel about your shamecaps:</p>
       </Layout>
       <div className="chart">
-        <Suspense fallback={<Loading />}>
-          <Chart />
-        </Suspense>
+        <Chart metrics={metrics} />
       </div>
       <Layout>
         <Shamelist

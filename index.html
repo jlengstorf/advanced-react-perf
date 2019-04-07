@@ -4,23 +4,31 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>A great app!</title>
+    <title>shame.dev</title>
     <!-- Google fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin />
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,600,900" rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/css?family=Montserrat:400,600,900"
+      rel="stylesheet"
+    />
     <!-- Local fonts -->
-    <link rel="preload" as="font" type="font/woff2" href="./roboto-mono-v6-latin-italic.woff2" crossorigin>
-    <link rel="preload" as="font" type="font/woff2" href="./roboto-mono-v6-latin-regular.woff2" crossorigin>
+    <link
+      rel="preload"
+      as="font"
+      type="font/woff2"
+      href="./roboto-mono-v6-latin-italic.woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      as="font"
+      type="font/woff2"
+      href="./roboto-mono-v6-latin-regular.woff2"
+      crossorigin
+    />
   </head>
   <body>
     <noscript>This site only works with JavaScript enabled. :(</noscript>
     <div id="root"></div>
-    <script>
-      if ('serviceWorker' in navigator) {
-        window.addEventListener('load', () => {
-          navigator.serviceWorker.register('/service-worker.js');
-        });
-      }
-    </script>
   </body>
 </html>

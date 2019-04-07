@@ -1,4 +1,4 @@
-import React, { useState, Suspense, lazy } from 'react';
+import React, { useState } from 'react';
 import { navigate } from '@reach/router';
 import uuid from 'uuid/v4';
 import slugify from 'slugify';
@@ -6,12 +6,8 @@ import { useUser } from '../../context/user';
 import { useShamecaps } from '../../context/shamecaps';
 import { LANGUAGES, TYPES } from '../../constants';
 import Layout from '../layout/layout';
-import Loading from '../loading/loading';
 import Select from '../select/select';
-
-const CodeMirror = lazy(() =>
-  import('./codemirror' /* webpackChunkName: "codemirror" */)
-);
+import CodeMirror from './codemirror';
 
 import './add.scss';
 
@@ -26,35 +22,18 @@ const Add = () => {
   const handleSubmit = event => {
     event.preventDefault();
 
-    Promise.all([
-      import('prettier/standalone' /* webpackChunkName: "prettier" */),
-      import('prettier/parser-graphql' /* webpackChunkName: "prettier-parser-graphql" */),
-      import('prettier/parser-babylon' /* webpackChunkName: "prettier-parser-babylon" */),
-      import('prettier/parser-markdown' /* webpackChunkName: "prettier-parser-markdown" */)
-    ]).then(([prettier, ...plugins]) => {
-      let prettierCode;
-      try {
-        prettierCode = prettier.format(code, {
-          parser: language === 'javascript' ? 'babel' : language,
-          plugins
-        });
-      } catch {
-        prettierCode = code;
-      }
+    const data = {
+      id: uuid(),
+      title,
+      language: slugify(language, { lower: true }),
+      type: slugify(type, { lower: true }),
+      code: code.trim(),
+      created: Date.now(),
+      user: { name: user.name }
+    };
 
-      const data = {
-        id: uuid(),
-        title,
-        language: slugify(language, { lower: true }),
-        type: slugify(type, { lower: true }),
-        code: prettierCode.trim(),
-        created: Date.now(),
-        user: { name: user.name }
-      };
-
-      createShamecap(data);
-      navigate('/?language=all&type=all', { state: { created: true } });
-    });
+    createShamecap(data);
+    navigate('/?language=all&type=all', { state: { created: true } });
   };
 
   return (
@@ -85,9 +64,7 @@ const Add = () => {
             />
           </div>
         </fieldset>
-        <Suspense fallback={Loading}>
-          <CodeMirror onChange={c => setCode(c)} />
-        </Suspense>
+        <CodeMirror onChange={c => setCode(c)} />
         <button type="submit" className="submit-button">
           Share Your Shame
         </button>

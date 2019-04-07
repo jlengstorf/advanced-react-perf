@@ -1,12 +1,9 @@
 import React from 'react';
 import { RadarChart, CircularGridLines } from 'react-vis';
-import { useAnalytics } from '../../context/analytics';
-import Loading from '../loading/loading';
 
 import 'react-vis/dist/style.css';
 
-const Chart = () => {
-  const { loading, metrics } = useAnalytics();
+const Chart = ({ metrics }) => {
   const chartProps = metrics.reduce(
     (props, metric) => ({
       data: [{ ...props.data[0], [metric.key]: metric.value }],
@@ -22,9 +19,7 @@ const Chart = () => {
     { data: [], domains: [] }
   );
 
-  return loading ? (
-    <Loading />
-  ) : (
+  return (
     <RadarChart
       {...chartProps}
       style={{
