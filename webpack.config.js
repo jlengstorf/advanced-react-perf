@@ -7,6 +7,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
+const { GenerateSW } = require('workbox-webpack-plugin');
 
 const isProd = process.env.NODE_ENV === 'production';
 
@@ -80,7 +81,39 @@ module.exports = {
     }),
 
     // Apply gzip compression on the generated files
-    new CompressionPlugin()
+    new CompressionPlugin(),
+
+    // Add a Service Worker using workbox
+    new GenerateSW({
+      cacheId: 'shame-dev',
+      clientsClaim: true,
+      skipWaiting: true,
+      exclude: [/vendor/],
+      runtimeCaching: [
+        {
+          urlPattern: /vendor/,
+          handler: 'CacheFirst'
+        },
+        {
+          urlPattern: new RegExp('^https://fonts.googleapis.com/'),
+          handler: 'StaleWhileRevalidate',
+          options: {
+            cacheableResponse: {
+              statuses: [0, 200]
+            }
+          }
+        },
+        {
+          urlPattern: new RegExp('^https://pbs.twimg.com/'),
+          handler: 'StaleWhileRevalidate',
+          options: {
+            cacheableResponse: {
+              statuses: [0, 200]
+            }
+          }
+        }
+      ]
+    })
   ],
   devtool: isProd ? 'none' : 'source-map',
   devServer: {
