@@ -12,7 +12,7 @@ const Home = ({ location }) => {
     shamecaps,
     limit,
     loadMoreShamecaps,
-    totalCount
+    totalCount,
   } = useShamecaps();
 
   if (loading) {
@@ -27,7 +27,7 @@ const Home = ({ location }) => {
     <>
       <section className="banner">YOU KNOW WHAT YOU DID</section>
       <Layout>
-        {location.state.created && (
+        {location.state && location.state.created && (
           <div className="new-shamecap-notice">
             <p>
               <strong>Sweet catharsis!</strong> Your shame has been released

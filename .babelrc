@@ -1,4 +1,7 @@
 {
-  "presets": ["@babel/env", "@babel/react"],
+  "presets": [
+    ["@babel/preset-env", { "useBuiltIns": "usage", "corejs": 2 }],
+    "@babel/react"
+  ],
   "plugins": ["@babel/plugin-syntax-dynamic-import"]
 }
