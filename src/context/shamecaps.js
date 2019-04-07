@@ -14,30 +14,34 @@ const types = {
   delete: 'SHAMECAP_DELETE',
   load: 'SHAMECAP_LOAD',
   filter: 'SHAMECAP_FILTER',
-  loadMoreShamecaps: 'SHAMECAP_UPDATE_LIMIT',
+  loadMoreShamecaps: 'SHAMECAP_UPDATE_LIMIT'
 };
 
 // Support query string params for filters.
 const queryString = new URL(document.location).searchParams;
 
-const shamecaps = JSON.parse(window.localStorage.getItem('shamecaps')) || [
-  {
-    id: 1,
-    code: `const superhacks = 'this is terrible code';`,
-    user: { name: 'SaraVieira' },
-    title: 'Superhacks',
-    created: 1552860977820,
-    language: 'javascript',
-  },
-  {
-    id: 2,
-    code: `// oh my god I’m so sorry`,
-    user: { name: 'jlengstorf' },
-    title: 'I’m so sorry',
-    created: 1552860957820,
-    language: 'javascript',
-  },
-];
+const localShame = window.localStorage.getItem('shamecaps');
+const shamecaps =
+  localShame && localShame.length
+    ? JSON.parse(localShame)
+    : [
+        {
+          id: 1,
+          code: `const superhacks = 'this is terrible code';`,
+          user: { name: 'SaraVieira' },
+          title: 'Superhacks',
+          created: 1552860977820,
+          language: 'javascript'
+        },
+        {
+          id: 2,
+          code: `// oh my god I’m so sorry`,
+          user: { name: 'jlengstorf' },
+          title: 'I’m so sorry',
+          created: 1552860957820,
+          language: 'javascript'
+        }
+      ];
 
 const fetchShamecaps = limit => {
   const getData = () => shamecaps.slice(0, limit);
@@ -58,8 +62,8 @@ const initialState = {
   shamecaps: [],
   filters: {
     language: queryString.get('language') || 'all',
-    type: queryString.get('type') || 'all',
-  },
+    type: queryString.get('type') || 'all'
+  }
 };
 
 const reducer = (state, action) => {
@@ -68,31 +72,33 @@ const reducer = (state, action) => {
       return {
         ...state,
         loading: false,
-        shamecaps: action.shamecaps,
+        shamecaps: action.shamecaps
       };
 
     case types.loadMoreShamecaps:
       return {
         ...state,
-        limit: state.limit + LIMIT,
+        limit: state.limit + LIMIT
       };
 
     case types.create:
+      const nextShamecaps = [...state.shamecaps, action.shamecap];
+      window.localStorage.setItem('shamecaps', JSON.stringify(nextShamecaps));
       return {
         ...state,
-        shamecaps: [...state.shamecaps, action.shamecap],
+        shamecaps: nextShamecaps
       };
 
     case types.delete:
       return {
         ...state,
-        shamecaps: state.shamecaps.filter(s => s.id !== action.id),
+        shamecaps: state.shamecaps.filter(s => s.id !== action.id)
       };
 
     case types.filter:
       return {
         ...state,
-        filters: { ...state.filters, ...action.filters },
+        filters: { ...state.filters, ...action.filters }
       };
 
     default:
@@ -111,7 +117,7 @@ export const ShamecapsProvider = ({ children }) => (
 
 export const useShamecaps = userFilters => {
   const [{ loading, limit, shamecaps, filters }, dispatch] = useContext(
-    ShamecapsContext,
+    ShamecapsContext
   );
 
   // Only on mount — and only if no data has loaded — load the shamecaps.
@@ -125,15 +131,6 @@ export const useShamecaps = userFilters => {
       getData();
     }
   }, []);
-
-  useEffect(() => {
-    // If you empty localStorage, it gets caught in a loop saving an empty array
-    if (!window.localStorage.getItem('shamecaps') && shamecaps.length < 1) {
-      return;
-    }
-
-    window.localStorage.setItem('shamecaps', JSON.stringify(shamecaps));
-  }, [shamecaps]);
 
   useEffect(() => {
     const url = new URL(document.location);
@@ -167,8 +164,8 @@ export const useShamecaps = userFilters => {
       [
         language && language !== 'all' ? shamecap.language === language : true,
         type && type !== 'all' ? shamecap.type === type : true,
-        user ? shamecap.user.name === user : true,
-      ].every(Boolean),
+        user ? shamecap.user.name === user : true
+      ].every(Boolean)
     );
 
   return {
@@ -180,6 +177,6 @@ export const useShamecaps = userFilters => {
     createShamecap,
     deleteShamecap,
     loadMoreShamecaps,
-    setFilters,
+    setFilters
   };
 };

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from '@reach/router';
-import { distanceInWords } from 'date-fns';
+import { formatDistance } from 'date-fns';
 import Code from './code';
 import Controls from './controls';
 
@@ -33,7 +33,7 @@ export default ({
           >
             @{user.name}
           </Link>{' '}
-          {distanceInWords(Date.now(), created, { addSuffix: true })}
+          {formatDistance(Date.now(), created, { addSuffix: true })}
         </span>
       )}
       {showControls && (
