@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from '@reach/router';
 import prettier from 'prettier/standalone';
-import { formatDistance } from 'date-fns';
+import moment from 'moment';
 import Code from './code';
 import Controls from './controls';
 
@@ -50,7 +50,7 @@ export default ({
           >
             @{user.name}
           </Link>{' '}
-          {formatDistance(Date.now(), created, { addSuffix: true })}
+          {moment(created).fromNow()}
         </span>
       )}
       {showControls && (
