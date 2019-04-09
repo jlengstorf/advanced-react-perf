@@ -76,7 +76,7 @@ module.exports = {
     // Apply gzip compression on the generated files
     new CompressionPlugin()
   ],
-  devtool: 'source-map',
+  devtool: process.env.NODE_ENV === 'production' ? 'none' : 'source-map',
   devServer: {
     host: 'localhost',
     port: 3000,
