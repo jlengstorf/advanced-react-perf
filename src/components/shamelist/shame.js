@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from '@reach/router';
-import { formatDistance } from 'date-fns';
+import formatDistance from 'date-fns/formatDistance';
 import Code from './code';
 import Controls from './controls';
 
