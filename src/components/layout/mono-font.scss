@@ -1,6 +1,7 @@
 /* roboto-mono-regular - latin */
 @font-face {
   font-family: 'Roboto Mono';
+  font-display: swap;
   font-style: normal;
   font-weight: 400;
   src: local('Roboto Mono'), local('RobotoMono-Regular'),
@@ -11,6 +12,7 @@
 /* roboto-mono-italic - latin */
 @font-face {
   font-family: 'Roboto Mono';
+  font-display: swap;
   font-style: italic;
   font-weight: 400;
   src: local('Roboto Mono Italic'), local('RobotoMono-Italic'),
