@@ -82,7 +82,13 @@ module.exports = {
       cacheId: 'shame-dev',
       clientsClaim: true,
       skipWaiting: true,
-      exclude: [/vendor/]
+      exclude: [/vendor/],
+      runtimeCaching: [
+        {
+          urlPattern: /vendor/,
+          handler: 'CacheFirst'
+        }
+      ]
     })
   ],
   devtool: process.env.NODE_ENV === 'production' ? 'none' : 'source-map',
