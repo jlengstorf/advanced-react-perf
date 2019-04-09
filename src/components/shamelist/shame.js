@@ -1,6 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from '@reach/router';
-import prettier from 'prettier/standalone';
 import moment from 'moment';
 import Code from './code';
 import Controls from './controls';
@@ -16,21 +15,25 @@ export default ({
   showControls,
   deleteShamecap
 }) => {
-  const plugins = [
-    require('prettier/parser-graphql'),
-    require('prettier/parser-babylon'),
-    require('prettier/parser-markdown')
-  ];
+  const [prettierCode, setPrettierCode] = useState('');
 
-  let prettierCode;
-  try {
-    prettierCode = prettier.format(code, {
-      parser: language === 'javascript' ? 'babel' : language,
-      plugins
-    });
-  } catch {
-    prettierCode = code;
-  }
+  Promise.all([
+    import('prettier/standalone' /* webpackChunkName: "prettier" */),
+    import('prettier/parser-graphql' /* webpackChunkName: "prettier-parser-graphql" */),
+    import('prettier/parser-babylon' /* webpackChunkName: "prettier-parser-babylon" */),
+    import('prettier/parser-markdown' /* webpackChunkName: "prettier-parser-markdown" */)
+  ]).then(([prettier, ...plugins]) => {
+    try {
+      setPrettierCode(
+        prettier.format(code, {
+          parser: language === 'javascript' ? 'babel' : language,
+          plugins
+        })
+      );
+    } catch {
+      setPrettierCode(code);
+    }
+  });
 
   return (
     <section className="shame-wrapper">
