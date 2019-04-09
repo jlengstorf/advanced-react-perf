@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from '@reach/router';
-import moment from 'moment';
+import { formatDistance } from 'date-fns';
 import Code from './code';
 import Controls from './controls';
 
@@ -50,7 +50,7 @@ export default ({
           <Link to={`/${user.name}`} state={{ username: user.displayName }}>
             @{user.name}
           </Link>{' '}
-          {moment(created).fromNow()}
+          {formatDistance(created, Date.now(), { addSuffix: true })}
         </span>
       )}
       {showControls && (
