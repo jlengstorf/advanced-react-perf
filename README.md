@@ -2,8 +2,6 @@
 
 This is the source code for an advanced React Performance workshop. It was designed by [Sara Vieira](https://github.com/SaraVieira), [Sia Karamalegos](https://github.com/siakaramalegos), and [Jason Lengstorf](https://github.com/jlengstorf).
 
-The slides can be found [here](https://github.com/siakaramalegos/react-perf-workshop).
-
 - [Abstract](#abstract)
 - [Prerequisites](#prerequisites)
 - [About the trainers](#about-the-trainers)
@@ -48,6 +46,10 @@ Intermediate React knowledge, Node/npm installed, Git installed, basic command l
 **Sia Karamalegos** is a developer, international conference speaker, and writer. She is a Google Developer Expert in Web Technologies and a Women Techmakers ambassador. She co-organizes #FrontEndParty, GDG New Orleans, and NOLA Hack Night in the New Orleans area. She is the founder and lead developer for Clio + Calliope Web Development and was recognized in the Silicon Bayou 100, the 100 most influential and active people in tech and entrepreneurship in Louisiana. When she's not coding, speaking, or consulting, Sia likes to design crochet patterns and dabble in charcoal figure drawing. She's also an avid endurance athlete.
 
 [Twitter](https://twitter.com/thegreengreek) | [Website](https://siakaramalegos.github.io/) | [Github](https://github.com/siakaramalegos) | [Blog](https://medium.com/@thegreengreek) | [StackOverflow](https://stackoverflow.com/users/5049215/sia?tab=profile) | [LinkedIn](https://www.linkedin.com/in/karamalegos)
+
+## Slides and Controls
+
+The slides are deployed [here](https://siakaramalegos.github.io/react-perf-workshop/#/). To advance the slides, use `n` for next and `p` for previous. The right arrow jumps to the next section (and left for previous section). Up and down to advance through slides within a section.
 
 ## Resources
 
