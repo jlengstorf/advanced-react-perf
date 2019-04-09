@@ -4,6 +4,7 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
   .BundleAnalyzerPlugin;
 const TerserPlugin = require('terser-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
   entry: {
@@ -22,7 +23,11 @@ module.exports = {
       },
       {
         test: /\.s?(a|c)ss$/,
-        use: ['style-loader', 'css-loader', 'sass-loader']
+        use: [
+          { loader: MiniCssExtractPlugin.loader },
+          'css-loader',
+          'sass-loader'
+        ]
       },
       {
         test: /\.svg$/,
@@ -61,7 +66,10 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: 'index.html'
     }),
-    new CleanWebpackPlugin()
+    new CleanWebpackPlugin(),
+    new MiniCssExtractPlugin({
+      filename: '[name].[hash].css'
+    })
   ],
   devtool: 'source-map',
   devServer: {
