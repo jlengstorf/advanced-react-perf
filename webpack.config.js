@@ -7,6 +7,7 @@ const TerserPlugin = require('terser-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
+const { GenerateSW } = require('workbox-webpack-plugin');
 
 module.exports = {
   entry: {
@@ -74,7 +75,14 @@ module.exports = {
     }),
 
     // Apply gzip compression on the generated files
-    new CompressionPlugin()
+    new CompressionPlugin(),
+
+    // Add a Service Worker using workbox
+    new GenerateSW({
+      cacheId: 'shame-dev',
+      clientsClaim: true,
+      skipWaiting: true
+    })
   ],
   devtool: process.env.NODE_ENV === 'production' ? 'none' : 'source-map',
   devServer: {
