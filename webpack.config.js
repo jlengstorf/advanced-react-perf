@@ -81,7 +81,8 @@ module.exports = {
     new GenerateSW({
       cacheId: 'shame-dev',
       clientsClaim: true,
-      skipWaiting: true
+      skipWaiting: true,
+      exclude: [/vendor/]
     })
   ],
   devtool: process.env.NODE_ENV === 'production' ? 'none' : 'source-map',
