@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import { useUser } from '../../context/user';
 import { useShamecaps } from '../../context/shamecaps';
 import Layout from '../layout/layout';
 import Shamelist from '../shamelist/shamelist';
-import Chart from './chart';
-
+import Loading from '../loading/loading';
 import './dashboard.scss';
+
+const Chart = lazy(() => import('./chart' /* webpackChunkName: "chart" */));
 
 const Dashboard = () => {
   const { user } = useUser();
@@ -26,7 +27,9 @@ const Dashboard = () => {
         <p>Here’s how people feel about your shamecaps:</p>
       </Layout>
       <div className="chart">
-        <Chart />
+        <Suspense fallback={<Loading />}>
+          <Chart />
+        </Suspense>
       </div>
       <Layout>
         <Shamelist
