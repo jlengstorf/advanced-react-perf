@@ -87,6 +87,33 @@ module.exports = {
         {
           urlPattern: /vendor/,
           handler: 'CacheFirst'
+        },
+        {
+          urlPattern: new RegExp('^https://fonts.googleapis.com/'),
+          handler: 'StaleWhileRevalidate',
+          options: {
+            cacheableResponse: {
+              statuses: [0, 200]
+            }
+          }
+        },
+        {
+          urlPattern: new RegExp('^https://fonts.gstatic.com/'),
+          handler: 'StaleWhileRevalidate',
+          options: {
+            cacheableResponse: {
+              statuses: [0, 200]
+            }
+          }
+        },
+        {
+          urlPattern: new RegExp('^https://pbs.twimg.com/'),
+          handler: 'StaleWhileRevalidate',
+          options: {
+            cacheableResponse: {
+              statuses: [0, 200]
+            }
+          }
         }
       ]
     })
