@@ -26,18 +26,35 @@ const Add = () => {
   const handleSubmit = event => {
     event.preventDefault();
 
-    const data = {
-      id: uuid(),
-      title,
-      language: slugify(language, { lower: true }),
-      type: slugify(type, { lower: true }),
-      code: code.trim(),
-      created: Date.now(),
-      user: { name: user.name }
-    };
+    Promise.all([
+      import('prettier/standalone' /* webpackChunkName: "prettier" */),
+      import('prettier/parser-graphql' /* webpackChunkName: "prettier-parser-graphql" */),
+      import('prettier/parser-babylon' /* webpackChunkName: "prettier-parser-babylon" */),
+      import('prettier/parser-markdown' /* webpackChunkName: "prettier-parser-markdown" */)
+    ]).then(([prettier, ...plugins]) => {
+      let prettierCode;
+      try {
+        prettierCode = prettier.format(code, {
+          parser: language === 'javascript' ? 'babel' : language,
+          plugins
+        });
+      } catch {
+        prettierCode = code;
+      }
 
-    createShamecap(data);
-    navigate('/?language=all&type=all', { state: { created: true } });
+      const data = {
+        id: uuid(),
+        title,
+        language: slugify(language, { lower: true }),
+        type: slugify(type, { lower: true }),
+        code: prettierCode.trim(),
+        created: Date.now(),
+        user: { name: user.name }
+      };
+
+      createShamecap(data);
+      navigate('/?language=all&type=all', { state: { created: true } });
+    });
   };
 
   return (
