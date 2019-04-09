@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { lazy, Suspense, useState } from 'react';
 import { navigate } from '@reach/router';
 import uuid from 'uuid/v4';
 import slugify from 'slugify';
@@ -7,9 +7,13 @@ import { useShamecaps } from '../../context/shamecaps';
 import { LANGUAGES, TYPES } from '../../constants';
 import Layout from '../layout/layout';
 import Select from '../select/select';
-import CodeMirror from './codemirror';
+import Loading from '../loading/loading';
 
 import './add.scss';
+
+const CodeMirror = lazy(() =>
+  import('./codemirror' /* webpackChunkName: "codemirror" */)
+);
 
 const Add = () => {
   const [title, setTitle] = useState('');
@@ -64,7 +68,9 @@ const Add = () => {
             />
           </div>
         </fieldset>
-        <CodeMirror onChange={c => setCode(c)} />
+        <Suspense fallback={<Loading />}>
+          <CodeMirror onChange={c => setCode(c)} />
+        </Suspense>
         <button type="submit" className="submit-button">
           Share Your Shame
         </button>
