@@ -1,8 +1,8 @@
 import React from 'react';
+import { Link } from '@reach/router';
 import { useShamecaps } from '../../context/shamecaps';
 import Layout from '../layout/layout';
 import Shamelist from '../shamelist/shamelist';
-import { Link } from '@reach/router';
 
 import './user.scss';
 

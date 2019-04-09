@@ -44,10 +44,7 @@ export default ({
       {showUserDetails && (
         <span className="details">
           Posted by{' '}
-          <Link
-            to={`/user/${user.name}`}
-            state={{ username: user.displayName }}
-          >
+          <Link to={`/${user.name}`} state={{ username: user.displayName }}>
             @{user.name}
           </Link>{' '}
           {moment(created).fromNow()}

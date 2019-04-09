@@ -12,7 +12,7 @@ const AppRouter = () => (
     <Home path="/" />
     <Add path="/add" />
     <Login path="/login" />
-    <User path="/user/:username" />
+    <User path="/:username" />
     <Dashboard path="/dashboard" />
   </Router>
 );
