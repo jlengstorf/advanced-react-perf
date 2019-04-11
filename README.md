@@ -6,6 +6,7 @@ This is the source code for an advanced React Performance workshop. It was desig
 - [Prerequisites](#prerequisites)
 - [About the trainers](#about-the-trainers)
 - [Slides and controls](#slides-and-controls)
+- [Resources](#resources)
 
 ## Abstract
 Getting performance right is hard, even when you have the luxury of starting an app from scratch. It's even harder when you need to improve the performance of existing apps, as is so often the case. In this workshop, Sia Karamalegos, Sara Vieira, and Jason Lengstorf will lead you through the process of:
@@ -34,7 +35,9 @@ Intermediate React knowledge, Node/npm installed, Git installed, basic command l
 
 ## About the trainers
 
-**Sara Vieira**
+**Sara Vieira** is a developer @CodeSandbox and an international agent of JS Bullshit 🚀, open sorcerer, maker of useless modules, Blogger, Drummer and horror movie fan girl.
+
+[Twitter](https://twitter.com/NikkitaFTW) | [Website](https://iamsaravieira.com/) | [Github](https://github.com/SaraVieira)
 
 **Jason Lengstorf** is a developer advocate, senior engineer, and occasional designer at Gatsby. He’s an advocate for building highly productive teams through better communication, well designed systems and processes, and healthy work-life balance, and he blogs about that sometimes. He lives in Portland, Oregon.
 
@@ -54,6 +57,8 @@ Want to learn more about how to measure and improve performance? Here you go:
 
 - [Modern DevTools course](https://moderndevtools.com/) by Umar Hansa
 - [/dev tips](https://umaar.com/dev-tips/) by Umar Hansa
+- [Making Google Fonts Faster](https://medium.com/clio-calliope/making-google-fonts-faster-aadf3c02a36d)
+- [Loading Fonts With Webpack](https://chriscourses.com/blog/loading-fonts-webpack)
 - [Optimize Website Speed with Chrome DevTools](https://developers.google.com/web/tools/chrome-devtools/speed/get-started) by Kayce Basques
 - [Assessing Loading Performance in Real Life with Navigation and Resource Timing](https://developers.google.com/web/fundamentals/performance/navigation-and-resource-timing/) by Jeremy Wagner
 - [User Timing API – Measuring User Experience Performance](https://www.keycdn.com/blog/user-timing/) by Cody Arsenault
