@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, lazy, Suspense } from 'react';
 import { navigate } from '@reach/router';
 import uuid from 'uuid/v4';
 import slugify from 'slugify';
@@ -7,7 +7,12 @@ import { useShamecaps } from '../../context/shamecaps';
 import { LANGUAGES, TYPES } from '../../constants';
 import Layout from '../layout/layout';
 import Select from '../select/select';
-import CodeMirror from './codemirror';
+import Loading from '../loading/loading';
+import usePrettier from '../../context/usePrettier';
+
+const CodeMirror = lazy(() =>
+  import('./codemirror' /* webpackChunkName: 'codemirror' */)
+);
 
 import './add.scss';
 
@@ -18,6 +23,7 @@ const Add = () => {
   const [code, setCode] = useState('');
   const { user } = useUser();
   const { createShamecap } = useShamecaps();
+  const prettierCode = usePrettier(code, language.toLowerCase());
 
   const handleSubmit = event => {
     event.preventDefault();
@@ -27,7 +33,7 @@ const Add = () => {
       title,
       language: slugify(language, { lower: true }),
       type: slugify(type, { lower: true }),
-      code: code.trim(),
+      code: prettierCode.trim(),
       created: Date.now(),
       user: { name: user.name }
     };
@@ -64,7 +70,9 @@ const Add = () => {
             />
           </div>
         </fieldset>
-        <CodeMirror onChange={c => setCode(c)} />
+        <Suspense fallback={<Loading />}>
+          <CodeMirror onChange={c => setCode(c)} />
+        </Suspense>
         <button type="submit" className="submit-button">
           Share Your Shame
         </button>

@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from '@reach/router';
-import prettier from 'prettier/standalone';
-import moment from 'moment';
+import { formatDistance } from 'date-fns';
 import Code from './code';
 import Controls from './controls';
 
@@ -16,28 +15,12 @@ export default ({
   showControls,
   deleteShamecap
 }) => {
-  const plugins = [
-    require('prettier/parser-graphql'),
-    require('prettier/parser-babylon'),
-    require('prettier/parser-markdown')
-  ];
-
-  let prettierCode;
-  try {
-    prettierCode = prettier.format(code, {
-      parser: language === 'javascript' ? 'babel' : language,
-      plugins
-    });
-  } catch {
-    prettierCode = code;
-  }
-
   return (
     <section className="shame-wrapper">
       <div className="shame">
         <div className="terminal">
           <Controls />
-          <Code language={language} code={prettierCode} />
+          <Code language={language} code={code} />
         </div>
       </div>
       <h3 className="title">{title}</h3>
@@ -47,7 +30,9 @@ export default ({
           <Link to={`/${user.name}`} state={{ username: user.displayName }}>
             @{user.name}
           </Link>{' '}
-          {moment(created).fromNow()}
+          {formatDistance(created, Date.now(), {
+            addSuffix: true
+          })}
         </span>
       )}
       {showControls && (
